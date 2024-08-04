@@ -1,0 +1,32 @@
+version: "3.8"
+
+services:
+  db:
+    image: postgres
+    environment:
+      POSTGRES_USER: arhex
+      POSTGRES_PASSWORD: hEllo@911
+      POSTGRES_DB: task
+    ports:
+      - "5432:5432"
+    networks:
+      custom_network:
+        ipv4_address: 172.20.0.2
+
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@arhexlabs.com
+      PGADMIN_DEFAULT_PASSWORD: hEllo@911
+    ports:
+      - "80:80"
+    networks:
+      custom_network:
+        ipv4_address: 172.20.0.3
+
+networks:
+  custom_network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/24
